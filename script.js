@@ -544,7 +544,7 @@ function createConfetti() {
 
 // ===== GOOGLE SHEETS INTEGRATION =====
 // IMPORTANT: Replace this URL with your Google Apps Script Web App URL
-const GOOGLE_SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwaKWGv1UORKsR_U89fK-BpF9YgsEPsNSwegnNSG-wGbqTyil6HfAcDoRBtmpqFsYK8/exec';
 
 function submitToGoogleSheet(data) {
     return fetch(GOOGLE_SHEET_URL, {
