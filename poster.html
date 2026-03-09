@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAITANYAM 2K26 Poster</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --gold: #f9d976;
+            --gold-dark: #e9b646;
+            --primary: #00f0ff;
+            --bg-deep: #0b0616;
+            --bg-mid: #1a0f2e;
+            --text-glow: 0 0 10px rgba(249, 217, 118, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Rajdhani', sans-serif;
+            color: #fff;
+        }
+
+        .poster-container {
+            width: 1920px;
+            height: 1080px;
+            background:
+                radial-gradient(circle at 50% 50%, rgba(26, 15, 46, 0.8), var(--bg-deep)),
+                linear-gradient(to bottom, var(--bg-deep) 0%, #150a21 50%, var(--bg-deep) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 60px;
+            transform: scale(0.7);
+            /* Adjust in browser if needed */
+            transform-origin: center;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+        }
+
+        @media (max-width: 1920px) {
+            .poster-container {
+                transform: scale(calc(100vw / 1920));
+            }
+        }
+
+        /* Ambient Stars / Particles */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0, 0, 0, 0)),
+                radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0)),
+                radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0)),
+                radial-gradient(2px 2px at 160px 120px, #00f0ff, rgba(0, 0, 0, 0));
+            background-size: 200px 200px;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* Tech/City Silhouette at bottom */
+        .silhouette {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 250px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1000 200" xmlns="http://www.w3.org/2000/svg"><path fill="%2305020a" d="M0,200 L0,150 L50,150 L50,100 L100,100 L100,180 L150,180 L150,80 L200,80 L200,120 L250,120 L250,60 L300,60 L300,160 L350,160 L350,90 L400,90 L400,140 L450,140 L450,50 L500,50 L500,110 L550,110 L550,30 L600,30 L600,150 L650,150 L650,70 L700,70 L700,170 L750,170 L750,100 L800,100 L800,130 L850,130 L850,40 L900,40 L900,150 L950,150 L950,80 L1000,80 L1000,200 Z"/></svg>') repeat-x bottom;
+            background-size: 1000px 250px;
+            z-index: 1;
+            opacity: 0.8;
+            filter: drop-shadow(0 -5px 15px rgba(0, 240, 255, 0.1));
+        }
+
+        /* Top Hanging Tech Ornaments (instead of lanterns) */
+        .ornament {
+            position: absolute;
+            top: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            z-index: 2;
+        }
+
+        .ornament::after {
+            content: '\f2db';
+            /* Microchip icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            bottom: -25px;
+            left: -12px;
+            color: var(--gold);
+            font-size: 24px;
+            filter: drop-shadow(0 0 10px var(--gold));
+        }
+
+        .ornament-1 {
+            left: 5%;
+            height: 150px;
+        }
+
+        .ornament-2 {
+            left: 12%;
+            height: 220px;
+        }
+
+        .ornament-3 {
+            right: 5%;
+            height: 180px;
+        }
+
+        .ornament-4 {
+            right: 12%;
+            height: 130px;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            text-align: center;
+        }
+
+        /* Header / College Text */
+        .header-text {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .header-text h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            color: #fff;
+            letter-spacing: 3px;
+        }
+
+        .header-text h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            color: #ddd;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        .header-text h4 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 26px;
+            color: var(--primary);
+            letter-spacing: 5px;
+            margin-top: 15px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        /* Main Title Area */
+        .invitation {
+            font-family: 'Cinzel', serif;
+            font-style: italic;
+            font-size: 28px;
+            color: var(--gold);
+            margin-top: 30px;
+            margin-bottom: -10px;
+        }
+
+        .main-title-wrapper {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto;
+        }
+
+        .title-chaitanyam {
+            font-family: 'Cinzel', serif;
+            font-weight: 800;
+            font-size: 150px;
+            background: linear-gradient(to bottom, #fff, var(--gold) 60%, var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 25px rgba(249, 217, 118, 0.4));
+            letter-spacing: 10px;
+            line-height: 1;
+        }
+
+        .title-chaitanyam::first-letter {
+            font-size: 210px;
+            line-height: 0.8;
+            vertical-align: middle;
+        }
+
+        .subtitle-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-top: -10px;
+        }
+
+        .chapter-text {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            color: #fff;
+            letter-spacing: 4px;
+        }
+
+        .title-year {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 80px;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(249, 217, 118, 0.5);
+            font-weight: 900;
+        }
+
+        .date-text {
+            font-family: 'Cinzel', serif;
+            font-size: 55px;
+            color: #fff;
+            letter-spacing: 8px;
+            margin-top: 10px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Centered Event Badge */
+        .event-frame {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin-top: 60px;
+            /* Offset to place below title */
+            border: 2px solid var(--gold);
+            padding: 15px 40px;
+            border-radius: 10px;
+            background: rgba(11, 6, 22, 0.8);
+            box-shadow: 0 0 20px rgba(249, 217, 118, 0.2), inset 0 0 15px rgba(249, 217, 118, 0.1);
+            backdrop-filter: blur(5px);
+            z-index: 15;
+            width: max-content;
+        }
+
+        .event-frame::before,
+        .event-frame::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+        }
+
+        .event-frame::before {
+            top: -6px;
+            left: -6px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .event-frame::after {
+            bottom: -6px;
+            right: -6px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .event-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 38px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .event-title span {
+            color: var(--primary);
+        }
+
+        /* Floating Feature Bubbles (Like Cultural, Flash Mob, etc. in original) */
+        .feature-bubbles {
+            position: absolute;
+            top: 55%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 150px;
+            pointer-events: none;
+        }
+
+        .bubble {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 220px;
+        }
+
+        .bubble-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, rgba(11, 6, 22, 0.8) 80%);
+            border: 2px solid rgba(0, 240, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 55px;
+            color: var(--primary);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            position: relative;
+        }
+
+        .bubble-icon::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            bottom: -5px;
+            left: -5px;
+            right: -5px;
+            border: 1px dashed var(--gold);
+            border-radius: 50%;
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .bubble-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 15px;
+            border-radius: 5px;
+        }
+
+        .left-bubbles {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .right-bubbles {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* QR & Registration */
+        .bottom-area {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 20;
+        }
+
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .reg-now-btn {
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            padding: 10px 40px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(249, 217, 118, 0.5);
+        }
+
+        .qr-box {
+            width: 160px;
+            height: 160px;
+            background: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            border: 4px solid var(--gold);
+            box-shadow: 0 0 20px rgba(249, 217, 118, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .website-link {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 22px;
+            color: #fff;
+            margin-top: 10px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Coordinators Footer */
+        .coordinators-footer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .coord-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .coord-title {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .coord-list {
+            display: flex;
+            gap: 30px;
+            text-align: left;
+        }
+
+        .person {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .p-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .p-phone {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 18px;
+            color: #ccc;
+        }
+
+        .center-group {
+            text-align: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="poster-container">
+        <!-- Background Elements -->
+        <div class="stars"></div>
+        <div class="silhouette"></div>
+
+        <!-- Ornaments -->
+        <div class="ornament ornament-1"></div>
+        <div class="ornament ornament-2"></div>
+        <div class="ornament ornament-3"></div>
+        <div class="ornament ornament-4"></div>
+
+        <div class="content">
+            <!-- Top Headers -->
+            <div class="header-text">
+                <h2>CHAITANYA ENGINEERING COLLEGE</h2>
+                <h3>KOMMADI, VISAKHAPATNAM</h3>
+                <h4>Department of Artificial Intelligence</h4>
+            </div>
+
+            <!-- Main Title Area -->
+            <div class="invitation">Invites you to experience</div>
+
+            <div class="main-title-wrapper">
+                <div class="title-chaitanyam">CHAITANYAM</div>
+                <div class="subtitle-row">
+                    <!-- <div class="chapter-text">TECHNICAL FEST</div> -->
+                    <div class="title-year">2K26</div>
+                </div>
+            </div>
+
+            <div class="date-text">MARCH 13TH</div>
+
+            <!-- Centered Event Badge -->
+            <div class="event-frame">
+                <div class="event-title">TECHNICAL FACE-OFF <span>(DEBATE)</span></div>
+            </div>
+
+            <!-- Floating Features (Simulating the bubbles in the reference poster) -->
+            <div class="feature-bubbles">
+                <div class="left-bubbles">
+                    <div class="bubble">
+                        <div class="bubble-icon"><i class="fas fa-users"></i></div>
+                        <div class="bubble-text">1 VS 1 BATTLE</div>
+                    </div>
+                    <div class="bubble" style="margin-left: 50px;">
+                        <div class="bubble-icon"><i class="fas fa-stopwatch"></i></div>
+                        <div class="bubble-text">3 MIN ROUNDS</div>
+                    </div>
+                </div>
+
+                <div class="right-bubbles">
+                    <div class="bubble">
+                        <div class="bubble-icon"><i class="fas fa-brain"></i></div>
+                        <div class="bubble-text">TECH TOPICS</div>
+                    </div>
+                    <div class="bubble" style="margin-right: 50px;">
+                        <div class="bubble-icon"><i class="fas fa-trophy"></i></div>
+                        <div class="bubble-text">EXCITING PRIZES</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Area: QR & Coordinators -->
+            <div class="bottom-area">
+                <div class="qr-section">
+                    <div class="reg-now-btn">REGISTER HERE</div>
+                    <div class="website-link">
+                        <i class="fas fa-globe"></i> chaitanyam.edu.in/debate
+                    </div>
+                </div>
+
+                <div class="coordinators-footer">
+                    <!-- Faculty Coordinators -->
+                    <div class="coord-group">
+                        <div class="coord-title">FACULTY COORDINATOR</div>
+                        <div class="coord-list">
+                            <div class="person">
+                                <span class="p-name">Mrs. Jayasree</span>
+                                <span class="p-phone">9398757839</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student Coordinators -->
+                    <div class="coord-group" style="align-items: flex-end;">
+                        <div class="coord-title">STUDENT COORDINATORS</div>
+                        <div class="coord-list">
+                            <div class="person">
+                                <span class="p-name">Satya Sisir</span>
+                                <span class="p-phone">8309293975</span>
+                            </div>
+                            <div class="person">
+                                <span class="p-name">Sirisha</span>
+                                <span class="p-phone">9392183297</span>
+                            </div>
+                            <div class="person">
+                                <span class="p-name">Balaji</span>
+                                <span class="p-phone">8125865463</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
