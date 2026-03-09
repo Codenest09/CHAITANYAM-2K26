@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAITANYAM 2K26 - QR Poster</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #020210;
+            font-family: 'Rajdhani', sans-serif;
+            padding: 30px 15px;
+            gap: 24px;
+        }
+
+        /* ========== POSTER ========== */
+        .poster {
+            position: relative;
+            width: 480px;
+            height: 640px;
+            background: #0a0a1a;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(0, 240, 255, 0.15), 0 0 120px rgba(123, 47, 255, 0.1);
+        }
+
+        /* --- Circuit Board Pattern (SVG overlay) --- */
+        .circuit-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* --- Neural Network / Particle Background --- */
+        .particle-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle-bg canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- Content Layer --- */
+        .poster-content {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 40px 30px 30px;
+        }
+
+        /* Title */
+        .title-main {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 44px;
+            letter-spacing: 6px;
+            text-align: center;
+            color: #00f0ff;
+            text-shadow:
+                0 0 10px rgba(0, 240, 255, 0.8),
+                0 0 30px rgba(0, 240, 255, 0.4),
+                0 0 60px rgba(0, 240, 255, 0.2);
+            line-height: 1.1;
+        }
+
+        .title-sub {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 44px;
+            letter-spacing: 10px;
+            color: #ffd700;
+            text-shadow:
+                0 0 10px rgba(255, 215, 0, 0.8),
+                0 0 30px rgba(255, 215, 0, 0.4),
+                0 0 60px rgba(255, 215, 0, 0.2);
+            margin-top: -2px;
+        }
+
+        /* Event Name */
+        .event-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            margin-top: 12px;
+            text-transform: uppercase;
+        }
+
+        /* QR Code Area */
+        .qr-area {
+            position: relative;
+            margin: 28px 0 20px;
+        }
+
+        .qr-frame {
+            position: relative;
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow:
+                0 0 20px rgba(0, 240, 255, 0.5),
+                0 0 40px rgba(0, 240, 255, 0.2),
+                0 0 80px rgba(0, 240, 255, 0.1);
+        }
+
+        .qr-frame img {
+            display: block;
+            width: 230px;
+            height: 230px;
+        }
+
+        /* Neon corner brackets */
+        .qr-bracket {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            z-index: 10;
+        }
+
+        .qr-bracket::before,
+        .qr-bracket::after {
+            content: '';
+            position: absolute;
+            background: #00f0ff;
+            box-shadow: 0 0 8px #00f0ff, 0 0 16px rgba(0, 240, 255, 0.4);
+        }
+
+        .qr-bracket.tl {
+            top: -6px;
+            left: -6px;
+        }
+
+        .qr-bracket.tl::before {
+            top: 0;
+            left: 0;
+            width: 28px;
+            height: 3px;
+        }
+
+        .qr-bracket.tl::after {
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 28px;
+        }
+
+        .qr-bracket.tr {
+            top: -6px;
+            right: -6px;
+        }
+
+        .qr-bracket.tr::before {
+            top: 0;
+            right: 0;
+            width: 28px;
+            height: 3px;
+        }
+
+        .qr-bracket.tr::after {
+            top: 0;
+            right: 0;
+            width: 3px;
+            height: 28px;
+        }
+
+        .qr-bracket.bl {
+            bottom: -6px;
+            left: -6px;
+        }
+
+        .qr-bracket.bl::before {
+            bottom: 0;
+            left: 0;
+            width: 28px;
+            height: 3px;
+        }
+
+        .qr-bracket.bl::after {
+            bottom: 0;
+            left: 0;
+            width: 3px;
+            height: 28px;
+        }
+
+        .qr-bracket.br {
+            bottom: -6px;
+            right: -6px;
+        }
+
+        .qr-bracket.br::before {
+            bottom: 0;
+            right: 0;
+            width: 28px;
+            height: 3px;
+        }
+
+        .qr-bracket.br::after {
+            bottom: 0;
+            right: 0;
+            width: 3px;
+            height: 28px;
+        }
+
+        /* Scan line */
+        .scan-line {
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+            animation: scanAnim 2.8s ease-in-out infinite;
+            z-index: 11;
+            border-radius: 2px;
+        }
+
+        @keyframes scanAnim {
+            0% {
+                top: 10px;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                top: calc(100% - 13px);
+                opacity: 0;
+            }
+        }
+
+        /* Scan text */
+        .scan-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scan-text .arrow {
+            color: #ffd700;
+            font-size: 20px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+            animation: arrowBounce 1.2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes arrowBounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Bottom info */
+        .bottom-info {
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .dept-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .venue-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: rgba(255, 215, 0, 0.8);
+            margin-top: 4px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        /* ========== DOWNLOAD BUTTON ========== */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, #7b2fff, #00f0ff);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 25px rgba(123, 47, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 100;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 35px rgba(0, 240, 255, 0.5);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .download-btn i {
+            font-size: 18px;
+        }
+
+        .download-btn.downloading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        /* Neon border glow on poster edges */
+        .poster::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid rgba(0, 240, 255, 0.15);
+            border-radius: 4px;
+            z-index: 6;
+            pointer-events: none;
+            box-shadow: inset 0 0 30px rgba(0, 240, 255, 0.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== POSTER (this gets captured for download) ===== -->
+    <div class="poster" id="poster">
+
+        <!-- Particle / Neural Network Background -->
+        <div class="particle-bg">
+            <canvas id="bgCanvas"></canvas>
+        </div>
+
+        <!-- Circuit Board SVG Layer -->
+        <svg class="circuit-layer" viewBox="0 0 480 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Top-left circuit -->
+            <path d="M0 80 L60 80 L80 60 L80 0" stroke="rgba(0,240,255,0.35)" stroke-width="1.5" fill="none" />
+            <circle cx="60" cy="80" r="3" fill="#00f0ff" opacity="0.7" />
+            <circle cx="80" cy="60" r="2.5" fill="#00f0ff" opacity="0.5" />
+            <path d="M0 120 L40 120 L50 110 L50 80" stroke="rgba(0,240,255,0.25)" stroke-width="1" fill="none" />
+            <circle cx="40" cy="120" r="2" fill="#00f0ff" opacity="0.4" />
+
+            <path d="M0 200 L30 200 L45 185 L45 150" stroke="rgba(0,240,255,0.2)" stroke-width="1" fill="none" />
+            <circle cx="30" cy="200" r="2.5" fill="#00f0ff" opacity="0.5" />
+
+            <!-- Top-right circuit -->
+            <path d="M480 80 L420 80 L400 60 L400 0" stroke="rgba(0,240,255,0.35)" stroke-width="1.5" fill="none" />
+            <circle cx="420" cy="80" r="3" fill="#00f0ff" opacity="0.7" />
+            <circle cx="400" cy="60" r="2.5" fill="#00f0ff" opacity="0.5" />
+            <path d="M480 120 L440 120 L430 110 L430 80" stroke="rgba(0,240,255,0.25)" stroke-width="1" fill="none" />
+            <circle cx="440" cy="120" r="2" fill="#00f0ff" opacity="0.4" />
+
+            <path d="M480 200 L450 200 L435 185 L435 150" stroke="rgba(0,240,255,0.2)" stroke-width="1" fill="none" />
+            <circle cx="450" cy="200" r="2.5" fill="#00f0ff" opacity="0.5" />
+
+            <!-- Bottom-left circuit -->
+            <path d="M0 560 L60 560 L80 580 L80 640" stroke="rgba(0,240,255,0.35)" stroke-width="1.5" fill="none" />
+            <circle cx="60" cy="560" r="3" fill="#00f0ff" opacity="0.7" />
+            <circle cx="80" cy="580" r="2.5" fill="#00f0ff" opacity="0.5" />
+            <path d="M0 520 L40 520 L50 530 L50 560" stroke="rgba(0,240,255,0.25)" stroke-width="1" fill="none" />
+            <circle cx="40" cy="520" r="2" fill="#00f0ff" opacity="0.4" />
+
+            <path d="M0 440 L30 440 L45 455 L45 490" stroke="rgba(0,240,255,0.2)" stroke-width="1" fill="none" />
+            <circle cx="30" cy="440" r="2.5" fill="#00f0ff" opacity="0.5" />
+
+            <!-- Bottom-right circuit -->
+            <path d="M480 560 L420 560 L400 580 L400 640" stroke="rgba(0,240,255,0.35)" stroke-width="1.5"
+                fill="none" />
+            <circle cx="420" cy="560" r="3" fill="#00f0ff" opacity="0.7" />
+            <circle cx="400" cy="580" r="2.5" fill="#00f0ff" opacity="0.5" />
+            <path d="M480 520 L440 520 L430 530 L430 560" stroke="rgba(0,240,255,0.25)" stroke-width="1" fill="none" />
+            <circle cx="440" cy="520" r="2" fill="#00f0ff" opacity="0.4" />
+
+            <path d="M480 440 L450 440 L435 455 L435 490" stroke="rgba(0,240,255,0.2)" stroke-width="1" fill="none" />
+            <circle cx="450" cy="440" r="2.5" fill="#00f0ff" opacity="0.5" />
+
+            <!-- Mid-left decorative lines -->
+            <path d="M0 320 L25 320" stroke="rgba(0,240,255,0.2)" stroke-width="1" fill="none" />
+            <circle cx="25" cy="320" r="2" fill="#00f0ff" opacity="0.3" />
+            <path d="M0 360 L15 360" stroke="rgba(0,240,255,0.15)" stroke-width="1" fill="none" />
+
+            <!-- Mid-right decorative lines -->
+            <path d="M480 320 L455 320" stroke="rgba(0,240,255,0.2)" stroke-width="1" fill="none" />
+            <circle cx="455" cy="320" r="2" fill="#00f0ff" opacity="0.3" />
+            <path d="M480 360 L465 360" stroke="rgba(0,240,255,0.15)" stroke-width="1" fill="none" />
+
+            <!-- Cross hatch decorative -->
+            <path d="M100 0 L100 20 L120 40" stroke="rgba(0,240,255,0.12)" stroke-width="0.8" fill="none" />
+            <path d="M380 0 L380 20 L360 40" stroke="rgba(0,240,255,0.12)" stroke-width="0.8" fill="none" />
+            <path d="M100 640 L100 620 L120 600" stroke="rgba(0,240,255,0.12)" stroke-width="0.8" fill="none" />
+            <path d="M380 640 L380 620 L360 600" stroke="rgba(0,240,255,0.12)" stroke-width="0.8" fill="none" />
+        </svg>
+
+        <!-- Content -->
+        <div class="poster-content">
+            <div class="title-main">CHAITANYAM</div>
+            <div class="title-sub">2K26</div>
+            <div class="event-name">Technical Face-Off (Debate)</div>
+
+            <div class="qr-area">
+                <div class="qr-frame">
+                    <div class="qr-bracket tl"></div>
+                    <div class="qr-bracket tr"></div>
+                    <div class="qr-bracket bl"></div>
+                    <div class="qr-bracket br"></div>
+                    <div class="scan-line"></div>
+                    <img src="project_qr.png" alt="Scan to Register">
+                </div>
+            </div>
+
+            <div class="scan-text">
+                SCAN TO REGISTER <span class="arrow">↑</span>
+            </div>
+
+            <div class="bottom-info">
+                <div class="dept-text">Department of Artificial Intelligence</div>
+                <div class="venue-text">13th March 2026 | Chaitanya Engineering College</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== DOWNLOAD BUTTON ===== -->
+    <button class="download-btn" id="downloadBtn" onclick="downloadPoster()">
+        <i class="fas fa-download"></i>
+        Download Poster
+    </button>
+
+    <script>
+        // ===== Background Particles & Neural Network =====
+        (function () {
+            const canvas = document.getElementById('bgCanvas');
+            const ctx = canvas.getContext('2d');
+            const poster = document.querySelector('.poster');
+
+            function resize() {
+                canvas.width = poster.offsetWidth * 2;
+                canvas.height = poster.offsetHeight * 2;
+                canvas.style.width = poster.offsetWidth + 'px';
+                canvas.style.height = poster.offsetHeight + 'px';
+                ctx.scale(2, 2);
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const w = () => poster.offsetWidth;
+            const h = () => poster.offsetHeight;
+
+            // Create nodes
+            const nodes = [];
+            for (let i = 0; i < 50; i++) {
+                nodes.push({
+                    x: Math.random() * 480,
+                    y: Math.random() * 640,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    r: Math.random() * 2.5 + 1,
+                    color: Math.random() > 0.6 ? '0,240,255' : (Math.random() > 0.5 ? '123,47,255' : '255,45,149'),
+                    alpha: Math.random() * 0.5 + 0.2
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, w(), h());
+
+                // Radial gradient background
+                const grd = ctx.createRadialGradient(w() / 2, h() / 2, 50, w() / 2, h() / 2, 400);
+                grd.addColorStop(0, 'rgba(20,10,50,0.3)');
+                grd.addColorStop(1, 'rgba(5,5,15,0)');
+                ctx.fillStyle = grd;
+                ctx.fillRect(0, 0, w(), h());
+
+                // Update & draw nodes
+                nodes.forEach(n => {
+                    n.x += n.vx;
+                    n.y += n.vy;
+                    if (n.x < 0 || n.x > 480) n.vx *= -1;
+                    if (n.y < 0 || n.y > 640) n.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${n.color}, ${n.alpha})`;
+                    ctx.fill();
+                });
+
+                // Draw connections
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const dx = nodes[i].x - nodes[j].x;
+                        const dy = nodes[i].y - nodes[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120) {
+                            const alpha = (1 - dist / 120) * 0.15;
+                            ctx.beginPath();
+                            ctx.moveTo(nodes[i].x, nodes[i].y);
+                            ctx.lineTo(nodes[j].x, nodes[j].y);
+                            ctx.strokeStyle = `rgba(0,240,255,${alpha})`;
+                            ctx.lineWidth = 0.6;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        // ===== Download Poster as PNG =====
+        function downloadPoster() {
+            const btn = document.getElementById('downloadBtn');
+            btn.classList.add('downloading');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+            const poster = document.getElementById('poster');
+
+            html2canvas(poster, {
+                backgroundColor: '#0a0a1a',
+                scale: 3,
+                useCORS: true,
+                logging: false,
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'CHAITANYAM_2K26_QR_Poster.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                btn.classList.remove('downloading');
+                btn.innerHTML = '<i class="fas fa-download"></i> Download Poster';
+            }).catch(err => {
+                console.error('Download error:', err);
+                btn.classList.remove('downloading');
+                btn.innerHTML = '<i class="fas fa-download"></i> Download Poster';
+                alert('Download failed. Please try again or take a screenshot.');
+            });
+        }
+    </script>
+</body>
+
+</html>
